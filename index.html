@@ -4,116 +4,142 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Scratchbox — nothing stays unless you keep it</title>
-  <meta name="description" content="Menu-bar inbox for Mac screenshots. Capture the screen, a region, a window, a full page, or record — then Keep what matters and let the rest expire.">
+  <meta name="description" content="The Mac inbox for screenshots and throwaway files, plus Scratchbox Capture for Chrome. Nothing stays unless you keep it.">
   <link rel="canonical" href="https://scratchbox.xyz/">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <meta property="og:title" content="Scratchbox">
-  <meta property="og:description" content="Nothing stays unless you keep it.">
-  <meta property="og:url" content="https://scratchbox.xyz/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg:#0e0f0c; --fg:#f4f1e8; --muted:#a8a396; --line:#2a2b26;
-      --accent:#e8d48b; --ink:#1a170c; --surface:#161712;
-    }
-    * { box-sizing: border-box; }
-    html { background: var(--bg); color: var(--fg); -webkit-font-smoothing: antialiased; }
-    body { margin: 0; font: 16px/1.5 "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif; background: var(--bg); }
-    a { color: inherit; }
-    h1,h2 { font-family: Newsreader, ui-serif, Georgia, serif; font-weight: 500; text-wrap: balance; letter-spacing: -0.03em; }
-    header, footer, .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
-    header { display: flex; justify-content: space-between; align-items: center; padding: 24px; }
-    .brand { display: flex; gap: 10px; align-items: center; text-decoration: none; font-weight: 500; }
-    nav { display: flex; gap: 20px; align-items: center; font-size: 14px; color: var(--muted); }
-    nav a { text-decoration: none; }
-    .btn { background: var(--accent); color: var(--ink); text-decoration: none; font-weight: 600; padding: 12px 18px; border-radius: 12px; display: inline-block; }
-    .ghost { color: var(--muted); text-decoration: none; padding: 12px 18px; }
-    .hero { text-align: center; padding: 48px 24px 16px; }
-    .kicker { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
-    h1 { font-size: clamp(36px, 6vw, 60px); line-height: 1.08; margin: 16px auto 16px; max-width: 16ch; }
-    .lede { color: var(--muted); font-size: 18px; max-width: 36rem; margin: 0 auto 28px; }
-    .cta { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-    .hero-shot { width: min(52rem, 100%); margin: 0 auto; }
-    .hero-shot img { width: 100%; height: auto; display: block; }
-    .cap { color: var(--muted); text-align:center; font-size:14px; margin: 8px 0 0; }
-    section { border-top: 1px solid var(--line); padding: 72px 0; }
-    .grid { display:grid; gap: 16px; grid-template-columns: repeat(5, 1fr); margin-top: 36px; }
-    @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 520px) { .grid { grid-template-columns: 1fr; } }
-    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
-    .card h3 { font-family: inherit; font-size: 16px; margin: 12px 0 8px; letter-spacing: 0; }
-    .card p, .facts p { color: var(--muted); font-size: 14px; margin: 0; }
-    .facts { display:grid; gap: 32px; grid-template-columns: repeat(3, 1fr); }
-    @media (max-width: 800px) { .facts { grid-template-columns: 1fr; } }
-    .pro { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 48px; max-width: 720px; margin: 0 auto; }
-    .pro ul { list-style: none; padding: 0; }
-    .pro li { padding: 8px 0 8px 24px; position: relative; }
-    .pro li:before { content: "✓"; position:absolute; left:0; color: var(--accent); }
-    footer { color: var(--muted); font-size: 14px; text-align:center; padding: 40px 24px; border-top: 1px solid var(--line); }
-    .ico { width:20px; height:20px; color: var(--accent); }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <header>
-    <a class="brand" href="/">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
-      Scratchbox
-    </a>
-    <nav>
-      <a href="#capture">Capture</a>
-      <a href="#pro">Pro</a>
-      <a class="btn" href="https://github.com/fortblocks/scratchbox/releases/latest">Download</a>
+  <header class="nav">
+    <a class="brand" href="/"><img class="brand-mark" src="/logo.svg" width="22" height="22" alt=""> Scratchbox</a>
+    <nav class="nav-links">
+      <a href="/#product">App</a>
+      <a href="/capture">Capture</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/download">Download</a>
     </nav>
-  </header>
-  <div class="hero wrap">
-    <p class="kicker">macOS 14+ · local only · $12 once</p>
-    <h1>Nothing stays unless you keep it.</h1>
-    <p class="lede">A menu-bar inbox for screenshots and throwaway files. Capture from the cube. Keep what matters. Let the rest expire.</p>
-    <div class="cta">
-      <a class="btn" href="https://github.com/fortblocks/scratchbox/releases/latest">Download for Mac</a>
-      <a class="ghost" href="#capture">See capture</a>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="/capture">Get Capture</a>
+      <a class="btn btn-primary" href="/download/Scratchbox.dmg?v=0.2.2" download="Scratchbox-0.2.2.dmg">Download for Mac</a>
     </div>
-    <figure class="hero-shot">
-      <img src="/macbook.jpg" width="1270" height="1070" alt="Scratchbox Inbox on a MacBook Pro — capture bar, file list, Keep Copy Move Preview Reveal Delete">
-    </figure>
-    <p class="cap">Lives in the menu bar. No Dock icon. Desktop stays empty.</p>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow reveal">macOS 14+ · local only · $12 once</div>
+    <h1 class="reveal d1">Desktop stays empty.</h1>
+    <p class="lede reveal d2">Scratchbox is the landing zone for screenshots and throwaway files. The Mac app catches them. Capture in Chrome sends the rest. Nothing stays unless you keep it.</p>
+    <div class="hero-actions reveal d3">
+      <a class="btn btn-primary" href="/download/Scratchbox.dmg?v=0.2.2" download="Scratchbox-0.2.2.dmg">Download Mac app</a>
+      <a class="btn btn-ghost" href="/pricing">See pricing</a>
+    </div>
+  </section>
+  <div class="stage-wrap reveal d4">
+    <div class="laptop">
+      <div class="laptop-screen">
+        <div class="os" id="os">
+          <div class="menubar">
+            <div class="mb-left">Finder · File · Edit</div>
+            <div class="mb-right"><span class="tray" id="tray"><img src="/logo.svg" width="14" height="14" alt=""></span> 8:41</div>
+          </div>
+          <div class="desktop" id="desktop"></div>
+          <aside class="popover" aria-hidden="true">
+            <div class="pop-h"><strong>Inbox</strong><span>Keep · Reveal</span></div>
+            <div class="pop-row"><span class="dot"></span> Screenshot 2026-09-12</div>
+            <div class="pop-row"><span class="dot"></span> Screen Recording 4</div>
+            <div class="pop-row"><span class="dot"></span> invoice-draft.pdf</div>
+            <div class="pop-f">3 in inbox · 2 expire tonight</div>
+          </aside>
+        </div>
+      </div>
+      <img class="laptop-img" src="/macbook-frame.png" width="1230" height="1015" alt="Scratchbox on a MacBook Pro">
+    </div>
+    <div class="stage-caption">
+      <span id="caption">A normal Mac after a day of screenshots.</span>
+      <div class="toggle" role="group" aria-label="Desktop state">
+        <button type="button" id="btnDirty" class="active">Dirty desktop</button>
+        <button type="button" id="btnClean">Managed by Scratchbox</button>
+      </div>
+    </div>
   </div>
-  <section id="capture">
+  <section class="section" id="product">
     <div class="wrap">
-      <p class="kicker">From the cube</p>
-      <h2>Five ways to capture. All of them land in Inbox.</h2>
-      <p class="lede" style="margin:16px 0 0;text-align:left">Visible, region, window, full page, and record — with the Mac shutter sound and a thumbnail in the corner, like Cmd-Shift-4.</p>
-      <div class="grid">
-        <article class="card"><h3>Visible</h3><p>Grab the screen you are looking at. Lands in Inbox, not Desktop.</p></article>
-        <article class="card"><h3>Region</h3><p>Drag a rectangle. Same shutter click as Cmd-Shift-4.</p></article>
-        <article class="card"><h3>Window</h3><p>Click the window. Scratchbox captures that frame, chrome and all.</p></article>
-        <article class="card"><h3>Full page</h3><p>Scrolls the front window and stitches one tall image.</p></article>
-        <article class="card"><h3>Record</h3><p>Display or a window. Optional microphone. Pro.</p></article>
+      <p class="kicker">Mac app</p>
+      <h2>A real Finder folder that empties itself.</h2>
+      <p class="sub">Scratchbox lives in the menu bar. Screenshots land in Inbox instead of Desktop. Keep what matters. Let the rest expire.</p>
+      <div class="grid-3">
+        <article class="card"><div class="badge">Free</div><h3>Screenshots skip Desktop</h3><p>Cmd-Shift-3 / 4 / 5 file saves go to ~/Scratchbox/Inbox. Turn it off and the old location comes back.</p></article>
+        <article class="card"><div class="badge">Free</div><h3>Keep is one click</h3><p>Promote a file to Kept and it never expires. Delete sends it to Trash — never a silent unlink.</p></article>
+        <article class="card"><div class="badge">Pro</div><h3>The box empties itself</h3><p>Screenshots last 48 hours. Other files last 7 days. Expired sits 24 hours for undo, then Trash.</p></article>
       </div>
     </div>
   </section>
-  <section>
-    <div class="wrap facts">
-      <article><h3>The box empties itself</h3><p>Screenshots last 48 hours. Other files last 7 days. Expired sits 24 hours for undo, then Trash. Pro.</p></article>
-      <article><h3>Keep is one click</h3><p>Promote a file to Kept and it never expires. Delete goes to system Trash — never a silent unlink.</p></article>
-      <article><h3>Voice on the take</h3><p>Talk over a recording from the cube menu. Audio stays on this Mac.</p></article>
+  <section class="section alt" id="from-the-cube">
+    <div class="wrap">
+      <p class="kicker">From the cube</p>
+      <h2>Five ways to capture. All of them land in Inbox.</h2>
+      <p class="sub">Visible, region, window, full page, and record — with the Mac shutter sound and a thumbnail in the corner, like Cmd-Shift-4.</p>
+      <div class="grid-5">
+        <article class="card"><h3>Visible</h3><p>The screen you are looking at.</p></article>
+        <article class="card"><h3>Region</h3><p>Drag a rectangle. Same shutter as Cmd-Shift-4.</p></article>
+        <article class="card"><h3>Window</h3><p>Click the window. Chrome and all.</p></article>
+        <article class="card"><h3>Full page</h3><p>Scrolls and stitches one tall image.</p></article>
+        <article class="card"><h3>Record</h3><p>Display or a window, optional mic. Pro.</p></article>
+      </div>
     </div>
   </section>
-  <section id="pro">
-    <div class="pro">
-      <p class="kicker">Scratchbox Pro</p>
-      <h2>One purchase. Desktop stays empty.</h2>
-      <ul>
-        <li>Screenshots expire so the desktop stays empty</li>
-        <li>Record the screen, with or without your voice</li>
-        <li>Pull new Downloads into Inbox automatically</li>
-      </ul>
-      <p class="lede" style="margin-top:24px;text-align:left">Free forever for stills, Inbox, Keep, and search. 14-day trial of Pro. Then $12 once — no subscription.</p>
-      <p class="lede" style="margin-top:8px;text-align:left;font-size:15px">Black, grey, or light Inbox in Settings. Default is black.</p>
+  <section class="section" id="capture">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Chrome extension</p>
+        <h2>Capture the tab. Land it in Inbox.</h2>
+        <p class="sub">Visible tab, selected area, or the entire page. Record the tab or the screen, with tab audio and optional microphone. Files save into Downloads. Watch Downloads — Pro — moves them into Inbox. Local only.</p>
+        <div class="hero-actions" style="justify-content:flex-start">
+          <a class="btn btn-primary" href="/capture">Get Capture</a>
+          <a class="btn btn-ghost" href="/pricing">Why Pro watches Downloads</a>
+        </div>
+      </div>
+      <div class="mock">
+        <header>Scratchbox Capture</header>
+        <p style="margin:0;padding:12px 14px 0;color:#5b616a;font-size:13px">Screenshot</p>
+        <button class="fake" type="button">Visible tab</button>
+        <button class="fake" type="button">Selected area</button>
+        <button class="fake" type="button">Entire page</button>
+        <p style="margin:0;padding:8px 14px 0;color:#5b616a;font-size:13px">Recording · tab audio · microphone</p>
+        <button class="fake" type="button">Record this tab</button>
+        <button class="fake" type="button">Record screen or window</button>
+        <div style="height:12px"></div>
+      </div>
     </div>
   </section>
-  <footer>scratchbox.xyz · local only · never uploads</footer>
+  <section class="section alt">
+    <div class="wrap">
+      <p class="kicker">How it works</p>
+      <h2>Four rules. No cleaner app.</h2>
+      <div class="grid-2" style="margin-top:28px">
+        <article class="card"><h3>1. Inbox is a folder</h3><p>~/Scratchbox/{Inbox, Kept, Expired} is Finder. Not a vault. Open it anytime.</p></article>
+        <article class="card"><h3>2. Never silent delete</h3><p>Pro expiry moves to Expired for a day, then system Trash. Undo resets the clock.</p></article>
+        <article class="card"><h3>3. Downloads stay Downloads</h3><p>Watch Downloads only moves new, finished files. No symlink. No replacing the folder.</p></article>
+        <article class="card"><h3>4. Local only</h3><p>No account. No upload. Quit restores the screenshot path when you ask it to.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="cta-band">
+    <h2>Start with a messy Desktop.</h2>
+    <p class="sub" style="margin:0 auto 24px">Notarized disk image. Open, drag to Applications, launch.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/download/Scratchbox.dmg?v=0.2.2" download="Scratchbox-0.2.2.dmg">Download for Mac</a>
+      <a class="btn btn-ghost" href="/pricing">Free vs Pro</a>
+    </div>
+  </section>
+  <footer class="site">
+    <div class="wrap">
+      <span>scratchbox.xyz</span>
+      <span><a href="/capture">Capture</a> · <a href="/pricing">Pricing</a> · <a href="/download">Download</a> · <a href="/privacy">Privacy</a></span>
+    </div>
+  </footer>
+  <script src="/app.js"></script>
 </body>
 </html>
